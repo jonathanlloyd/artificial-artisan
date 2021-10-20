@@ -1,3 +1,5 @@
+"""URL config for backoffice"""
+
 from django.urls import path
 
 from . import views
