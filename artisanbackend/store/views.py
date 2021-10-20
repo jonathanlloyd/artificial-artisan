@@ -1,6 +1,8 @@
+"""View methods for backoffice"""
+
 from django.http import HttpResponse
-from django.shortcuts import render
 
 
-def index(request):
+def index(_):
+    """Simple index view"""
     return HttpResponse('Store Homepage')
