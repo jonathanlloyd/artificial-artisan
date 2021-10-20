@@ -1,3 +1,3 @@
-from django.db import models
+"""Models for store"""
 
 # Create your models here.

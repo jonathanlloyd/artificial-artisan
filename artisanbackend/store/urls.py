@@ -1,3 +1,5 @@
+"""URL config for store"""
+
 from django.urls import path
 
 from . import views
