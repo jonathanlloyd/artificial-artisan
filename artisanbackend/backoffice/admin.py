@@ -1,3 +1,3 @@
-from django.contrib import admin
+"""Admin models for backoffice"""
 
 # Register your models here.
