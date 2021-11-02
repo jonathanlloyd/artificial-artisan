@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: roboto;
+}
+
+.nav {
+    padding: 2rem;
+}
+
+.logo {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2rem;
+}

@@ -14,6 +14,7 @@ INDEX_TEMPLATE = Template(f"""
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{% static 'user/images/favicon.png' %}}"/>
     <title>{ MANIFEST_FILE.get('site', {}).get('name') }</title>
+    {get_user_template('global-head.html')}
     {get_user_template('index-head.html')}
   </head>
   <body>

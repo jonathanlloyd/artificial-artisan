@@ -27,11 +27,14 @@ MANIFEST_FILE = _get_manifest_file()
 
 def get_user_template(template_name):
     """Load a template from the user config dir (as a string)"""
-    filename = os.path.join('templates/', template_name)
-    with open(
-        get_user_config_path(filename),
-        'r',
-        encoding='utf-8',
-    ) as template_file:
-        template = template_file.read()
-    return template
+    try:
+        filename = os.path.join('templates/', template_name)
+        with open(
+            get_user_config_path(filename),
+            'r',
+            encoding='utf-8',
+        ) as template_file:
+            template = template_file.read()
+        return template
+    except FileNotFoundError:
+        return ""
