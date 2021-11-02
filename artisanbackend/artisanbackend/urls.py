@@ -1,5 +1,5 @@
 """artisanbackend URL Configuration"""
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 urlpatterns = [
     path('artisan/', include('backoffice.urls')),

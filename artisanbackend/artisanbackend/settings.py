@@ -13,21 +13,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
-import toml
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load user settings
-USER_SETTINGS_PATH = os.path.join(BASE_DIR, 'artisan-settings.toml')
-try:
-    with open(USER_SETTINGS_PATH, 'r') as f:
-        USER_SETTINGS = toml.loads(f.read())
-except FileNotFoundError:
-    USER_SETTINGS = {}
-
-USER_CONFIG_DIR = USER_SETTINGS.get('user_config_dir')
+USER_CONFIG_DIR = './demosite'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
