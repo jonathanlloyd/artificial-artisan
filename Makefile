@@ -1,3 +1,7 @@
+.PHONY: run
+run:
+	@poetry run python artisanbackend/manage.py runserver
+
 .PHONY: lint_backend
 lint_backend:
 	@poetry run pylint artisanbackend/*
