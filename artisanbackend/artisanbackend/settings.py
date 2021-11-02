@@ -10,11 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import toml
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load user settings
+USER_SETTINGS_PATH = os.path.join(BASE_DIR, 'artisan-settings.toml')
+try:
+    with open(USER_SETTINGS_PATH, 'r') as f:
+        USER_SETTINGS = toml.loads(f.read())
+except FileNotFoundError:
+    USER_SETTINGS = {}
+
+USER_CONFIG_DIR = USER_SETTINGS.get('user_config_dir')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -120,6 +133,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    ('user/css', os.path.join(USER_CONFIG_DIR, 'css')),
+    ('user/js', os.path.join(USER_CONFIG_DIR, 'js')),
+    ('user/images', os.path.join(USER_CONFIG_DIR, 'images')),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
