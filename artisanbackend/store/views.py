@@ -1,6 +1,6 @@
 """View methods for backoffice"""
 
-from artisanutils import get_user_template, MANIFEST_FILE
+from artisanutils import get_user_template, get_manifest_file
 
 from django.http import HttpResponse
 from django.template import Template, RequestContext
@@ -13,7 +13,7 @@ INDEX_TEMPLATE = Template(f"""
   <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{% static 'user/images/favicon.png' %}}"/>
-    <title>{ MANIFEST_FILE.get('site', {}).get('name') }</title>
+    <title>{ get_manifest_file().get('site', {}).get('name') }</title>
     {get_user_template('global-head.html')}
     {get_user_template('index-head.html')}
   </head>

@@ -11,7 +11,7 @@ def get_user_config_path(filename):
     return os.path.join(settings.USER_CONFIG_DIR, filename)
 
 
-def _get_manifest_file():
+def get_manifest_file():
     """Load the parsed manifest file from user config (as a dict)"""
     with open(
         get_user_config_path('config.toml'),
@@ -20,9 +20,6 @@ def _get_manifest_file():
     ) as manifest_file:
         manifest = toml.loads(manifest_file.read())
     return manifest
-
-
-MANIFEST_FILE = _get_manifest_file()
 
 
 def get_user_template(template_name):
