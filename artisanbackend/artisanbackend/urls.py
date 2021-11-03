@@ -1,8 +1,7 @@
 """artisanbackend URL Configuration"""
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 urlpatterns = [
-    path('backoffice/', include('backoffice.urls')),
+    path('artisan/', include('backoffice.urls')),
     path('', include('store.urls')),
-    re_path(r'^.*/$', include('store.urls')),
 ]
