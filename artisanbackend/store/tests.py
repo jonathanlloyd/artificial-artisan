@@ -96,6 +96,29 @@ class TestLandingPage(TestCase):
             html=True,
         )
 
+    def test_missing_templates(self):
+        """Landing page should't fail when templates are missing"""
+        # Given user config with no templates
+        title = 'BlueIce Art'
+        user_config_dir = self.createUserConfig(
+            manifest={
+                'site': {
+                    'name': title,
+                },
+            },
+            templates={},
+        )
+
+        # When a user requests the index page
+        # pylint: disable=C0103
+        c = Client()
+        with self.setUserConfig(user_config_dir):
+            response = c.get('/')
+
+        # Then the response should be successful
+        self.assertEqual(response.status_code, 200)
+
+
     # pylint: disable=C0103, R0201
     def createUserConfig(self, manifest=None, templates=None):
         """Create a temporary user config directory with the supplied contents"""
@@ -115,7 +138,7 @@ class TestLandingPage(TestCase):
             encoding='utf-8',
         ) as f:
             f.write(toml.dumps(manifest or {}))
-        for template_name, template in (templates or []).items():
+        for template_name, template in (templates or {}).items():
             with open(
                 os.path.join(user_config_dir, 'templates', template_name),
             'w',
