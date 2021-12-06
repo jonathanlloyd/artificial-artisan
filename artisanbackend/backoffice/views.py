@@ -2,7 +2,7 @@
 
 from django import http
 from django.conf import settings
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -15,30 +15,31 @@ def login_view(request):
         if request.user.is_authenticated:
             return redirect(request.GET.get('next', '/artisan'))
         return render(request, 'backoffice/login.html', {})
-    else:
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        if email is None or password is None:
-            return http.HttpResponseBadRequest('email and password are required')
 
-        error_data = {
-            'error_message': 'Email or password is incorrect',
-        }
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    if email is None or password is None:
+        return http.HttpResponseBadRequest('email and password are required')
 
-        try:
-            user = User.objects.get(email__exact=email)
-        except User.DoesNotExist:
-            return render(request, 'backoffice/login.html', error_data)
+    error_data = {
+        'error_message': 'Email or password is incorrect',
+    }
 
-        password_is_correct = user.check_password(password)
-        if not password_is_correct:
-            return render(request, 'backoffice/login.html', error_data)
+    try:
+        user = User.objects.get(email__exact=email)
+    except User.DoesNotExist:
+        return render(request, 'backoffice/login.html', error_data)
 
-        login(request, user)
-        return redirect(request.GET.get('next', '/artisan'))
+    password_is_correct = user.check_password(password)
+    if not password_is_correct:
+        return render(request, 'backoffice/login.html', error_data)
+
+    login(request, user)
+    return redirect(request.GET.get('next', '/artisan'))
 
 
 def logout_view(request):
+    """Log the user out and redirect to the login page"""
     logout(request)
     return redirect(settings.LOGIN_URL)
 
@@ -47,4 +48,3 @@ def logout_view(request):
 def index(request):
     """Simple index view"""
     return render(request, 'backoffice/product-list.html')
-
