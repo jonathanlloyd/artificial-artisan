@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'backoffice/images/favicon.png' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'backoffice/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'backoffice/css/style.css' %}"
+    />
+    <title>Artificial Artisan</title>
+    {% block 'head' %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block 'body' %}
+    {% endblock %}
+    <script src="{% static 'backoffice/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'backoffice/js/feather.min.js' %}"></script>
+    <script>
+      feather.replace()
+    </script>
+  </body>
+</html>
